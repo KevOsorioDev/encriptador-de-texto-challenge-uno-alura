@@ -1,0 +1,356 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+// Variables
+$font-primary: "Roboto", sans-serif;
+$font-secondary: "Nunito", sans-serif;
+$font-weight-bold: 700;
+$font-weight-normal: 400;
+
+$color-background: #eae0d5;
+$color-text: #5e503f;
+$color-error: rgb(226, 64, 64);
+$color-encrypted-box-bg: #5e503f;
+$color-encrypted-text: #ffefe2;
+$color-clear-button-bg: #ffefe2;
+$color-clear-button-border: #c6ac8f;
+$color-placeholder: rgba(94, 80, 63, 0.7);
+$color-warning: rgba(94, 80, 63, 0.7);
+
+// Font sizes
+$font-size-base: clamp(0.1rem, 0.2241rem + 1.8391vw, 2.5rem);
+$font-size-small: clamp(0.5rem, 0.3483rem + 1.0115vw, 1.6rem);
+$font-size-button: clamp(0.1rem, -0.1207rem + 1.4713vw, 1.7rem);
+
+// Responsive breakpoints
+$breakpoint-small: 600px;
+$breakpoint-medium: 950px;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: $font-primary;
+  font-weight: $font-weight-bold;
+  font-style: normal;
+}
+
+body {
+  background-color: $color-background;
+
+  header {
+    cursor: default;
+
+    h1 {
+      padding: 4vh 0 1vh 0;
+      text-align: center;
+      font-size: clamp(1rem, 0.662rem + 2.2535vw, 2rem);
+      color: $color-text;
+
+      @media (max-width: $breakpoint-small) {
+        font-size: clamp(1rem, 0.7333rem + 1.7778vw, 1.4rem);
+      }
+    }
+  }
+
+  main {
+    display: flex;
+    justify-content: space-evenly;
+    width: 80vw;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 5vh;
+
+    @media (max-width: $breakpoint-medium) {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      padding-top: 2vh;
+    }
+
+    @media (max-width: $breakpoint-small) {
+      padding-top: 1vh;
+    }
+
+    .error-screen {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 3vh;
+      height: 100vh;
+      width: 100vw;
+      background-color: rgba(17, 17, 17, 0.7);
+      z-index: 100;
+
+      .error-container {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 3vh;
+        width: 70%;
+        padding: 6vh 3vw;
+        border-radius: 20px;
+        background-color: #fff;
+
+        .close-error-screen-button {
+          position: absolute;
+          top: 0;
+          left: 0;
+          padding: 1vh 1vw;
+          border-radius: 20px 0 20px 0;
+          background-color: $color-error;
+          cursor: pointer;
+
+          i {
+            font-size: clamp(0.5rem, 0.3621rem + 0.9195vw, 1.5rem);
+            color: #fff;
+          }
+        }
+
+        i {
+          font-size: clamp(0.5rem, -0.5345rem + 6.8966vw, 8rem);
+          color: $color-error;
+        }
+
+        p {
+          text-align: center;
+          font-size: $font-size-base;
+        }
+      }
+    }
+
+    .not-encrypted-box {
+      display: flex;
+      flex-direction: column;
+
+      textarea {
+        width: 45vw;
+        height: 65vh;
+        padding: 3vh 2vw;
+        border: none;
+        border-radius: 30px;
+        font-size: clamp(0.1rem, -0.1621rem + 1.7471vw, 2rem);
+        font-weight: normal;
+        color: $color-text;
+        background-color: #c6ac8f;
+        opacity: .8;
+        resize: none;
+        transition: opacity .5s ease-in-out;
+
+        &:focus {
+          opacity: 1;
+          outline: none;
+        }
+
+        &::placeholder {
+          color: $color-placeholder;
+        }
+
+        @media (max-width: $breakpoint-medium) {
+          height: 30vh;
+          width: 70vw;
+          padding: 2vh 3vw;
+          font-size: clamp(0.7rem, 0.362rem + 2.2535vw, 1.7rem);
+        }
+
+        @media (max-width: $breakpoint-small) {
+          height: 35vh;
+          width: 80vw;
+        }
+
+        @media (max-width: 500px) {
+          padding: 2vh 5vw;
+        }
+      }
+
+      .warning-text {
+        margin-left: 1%;
+        margin-top: 1%;
+        font-size: clamp(0.5rem, 0.4034rem + 0.6437vw, 1.2rem);
+        color: $color-text;
+        cursor: default;
+
+        @media (max-width: $breakpoint-medium) {
+          font-size: clamp(0.6rem, 0.3972rem + 1.3521vw, 1.2rem);
+        }
+      }
+
+      .buttons-box {
+        display: flex;
+        justify-content: space-evenly;
+        margin-top: 3%;
+        width: 100%;
+
+        #encrypt-button {
+          font-weight: lighter;
+          color: $color-background;
+          background-color: $color-text;
+        }
+
+        #desencrypt-button {
+          background: none;
+          border: 5px solid $color-text;
+          color: $color-text;
+        }
+      }
+    }
+
+    .encrypted-box {
+      position: relative;
+      height: 77vh;
+      width: 30vw;
+      padding: 2vh 1.5vw;
+      border-radius: 10px;
+      font-size: $font-size-small;
+      font-weight: normal;
+      word-break: break-all;
+      color: $color-encrypted-text;
+      background-color: $color-encrypted-box-bg;
+      cursor: default;
+
+      p {
+        width: 100%;
+        font-size: $font-size-small;
+        font-weight: normal;
+        word-break: break-all;
+        overflow: hidden;
+
+        @media (max-width: 900px) {
+          font-size: clamp(0.7rem, 0.362rem + 2.2535vw, 1.7rem);
+        }
+      }
+
+      .no-text-advert {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        top: 15%;
+        left: 0;
+
+        @media (max-width: $breakpoint-medium) {
+          top: 5%;
+        }
+
+        img {
+          width: 60%;
+          margin-bottom: 1.5vh;
+
+          @media (max-width: $breakpoint-medium) {
+            width: 30%;
+            margin-bottom: .5vh;
+          }
+
+          @media (max-width: $breakpoint-small) {
+            width: 40%;
+          }
+        }
+
+        .bold-text-advert {
+          margin-bottom: 10px;
+          width: 70%;
+          font-size: clamp(0.1rem, -0.1345rem + 1.5632vw, 1.8rem);
+          word-break: normal;
+          font-weight: normal;
+          text-align: center;
+
+          @media (max-width: $breakpoint-medium) {
+            font-size: clamp(0.4rem, 0.062rem + 2.2535vw, 1.4rem);
+          }
+
+          @media (max-width: $breakpoint-small) {
+            font-size: clamp(1rem, 0.8667rem + 0.8889vw, 1.2rem);
+          }
+        }
+
+        .light-text-advert {
+          width: 80%;
+          font-size: clamp(0.1rem, -0.0793rem + 1.1954vw, 1.4rem);
+          word-break: normal;
+          font-weight: lighter;
+          text-align: center;
+
+          @media (max-width: $breakpoint-medium) {
+            font-size: clamp(0.3rem, 0.0296rem + 1.8028vw, 1.1rem);
+          }
+
+          @media (max-width: $breakpoint-small) {
+            font-size: clamp(0.6rem, 0.4667rem + 0.8889vw, 0.8rem);
+          }
+        }
+      }
+
+      #clear-button {
+        position: absolute;
+        bottom: -3%;
+        left: 50%;
+        transform: translate(-50%, 0);
+        border: 5px solid $color-clear-button-border;
+        color: $color-text;
+        background-color: $color-clear-button-bg;
+
+        @media (max-width: $breakpoint-medium) {
+          bottom: -15%;
+        }
+      }
+
+      @media (max-width: $breakpoint-medium) {
+        height: 30vh;
+        width: 70vw;
+        padding: 2vh 3vw;
+        border-radius: 30px;
+        margin-top: 3vh;
+      }
+
+      @media (max-width: $breakpoint-small) {
+        height: 35vh;
+        width: 80vw;
+      }
+
+      @media (max-width: 500px) {
+        padding: 2vh 5vw;
+      }
+    }
+  }
+}
+
+button {
+  width: 40%;
+  padding: 2vh 0;
+  border: none;
+  border-radius: 20px;
+  font-size: $font-size-button;
+  cursor: pointer;
+  transition: transform .2s ease-in-out;
+
+  &:hover {
+    transform: scale(1.02);
+  }
+
+  @media (max-width: $breakpoint-medium) {
+    font-size: clamp(0.5rem, 0.162rem + 2.2535vw, 1.5rem);
+  }
+}
+
+.shake-warning {
+  animation: tilt-shaking .7s ease-in-out forwards, changeToRed .7s ease-in-out forwards;
+}
+
+@keyframes tilt-shaking {
+  0% { transform: translateX(-1px); }
+  25% { transform: translateX(1px); }
+  50% { transform: translateX(-1px); }
+  75% { transform: translateX(1px); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes changeToRed {
+  100% { color: $color-error; }
+}
